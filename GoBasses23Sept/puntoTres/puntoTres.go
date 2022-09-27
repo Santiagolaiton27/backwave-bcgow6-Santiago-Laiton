@@ -8,7 +8,7 @@ func main(){
 	var nombre string
 	var apellido string
 	var edad int
-	apellido = "Laiton"
+	apellido = "laiton"
 	var licenciaDeConducir = true
 	var estaturaDeLaPersona int
 	cantidadDeHijos := 2
