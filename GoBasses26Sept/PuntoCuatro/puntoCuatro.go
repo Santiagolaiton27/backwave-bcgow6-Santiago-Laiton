@@ -3,6 +3,7 @@ package main
 
 import(
 	"fmt"
+	"errors"
 )
 
 const (
@@ -40,26 +41,32 @@ func opMaxium(values ... int)(result int){
 	}
 	return min
 }
-func operacionAritmetica(operador string) func(valor1 ... int) int {
+func operacionAritmetica(operador string) (funcion func(valor1 ... int) int, err error ){
 	switch operador {
 	case "minimum":
-		return opMinium
+		funcion = opMinium 
 	case "average":
-		return opAverage
+		funcion = opAverage
 	case "maximum":
-		return opMaxium
+		funcion = opMaxium
+	default:
+		err =errors.New("Esta funcion no esta definida")
 	}
-	return nil
+	return  
  }
  
 
 func main(){
 	var returnedOperationFunction func(valor1 ... int) int
-	returnedOperationFunction = operacionAritmetica(minimum)
-	fmt.Println("Minimo : ",returnedOperationFunction(2, 3, 3, 4, 10, 2, 4, 5))
-	returnedOperationFunction = operacionAritmetica(average)
+	returnedOperationFunction, err := operacionAritmetica(minimum)
+	if(err != nil){
+		fmt.Println(err)
+	}else{
+		fmt.Println("Minimo : ",returnedOperationFunction(2, 3, 3, 4, 10, 2, 4, 5))
+	}
+	returnedOperationFunction, err = operacionAritmetica(average)
 	fmt.Println("Promedio : ",returnedOperationFunction(2, 3, 3, 4, 1, 2, 4, 5))
-	returnedOperationFunction = operacionAritmetica(maximum)
+	returnedOperationFunction ,err = operacionAritmetica(maximum)
 	fmt.Println("Maximo : ",returnedOperationFunction(2, 3, 3, 4, 1, 2, 4, 15))
 	
 }
