@@ -1,6 +1,1 @@
-HOLA MUNDO
-
-SOY SANTIAGO LAITO
-
-
-MELI
+## Clases de Go en el bootcampo MELI

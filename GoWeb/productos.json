@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name" : "Chocolate",
+        "color" : "Blanco",
+        "price": 45.000,
+        "stock": 20,
+        "cod": "Arr01",
+        "published" : "true",
+        "creationDate": "03-10-2022"
+    },
+    {
+        "id": 2,
+        "name" : "Chocolate",
+        "color" : "Cafe",
+        "price": 10.000,
+        "stock": 20,
+        "cod": "Cho01",
+        "published" : "true",
+        "creationDate": "03-10-2022"
+    },
+    {
+        "id": 3,
+        "name" : "Panela",
+        "color" : "Cafe",
+        "price": 15.000,
+        "stock": 20,
+        "cod": "Pa01",
+        "published" : "true",
+        "creationDate": "03-10-2022"
+    },
+    {
+        "id": 4,
+        "name" : "Azucar",
+        "color" : "Blanco",
+        "price": 20.000,
+        "stock": 20,
+        "cod": "Azu01",
+        "published" : "true",
+        "creationDate": "03-10-2022"
+    }
+]

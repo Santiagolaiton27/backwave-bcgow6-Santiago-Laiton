@@ -1,0 +1,115 @@
+{
+ "LastId": 18,
+ "Products": [
+  {
+   "id": 8,
+   "name": "Televisor",
+   "color": "Negro",
+   "price": 2000000,
+   "stock": 20,
+   "cod": "Tele01",
+   "published": "true",
+   "creationDate": "05-10-2022"
+  },
+  {
+   "id": 9,
+   "name": "Televisor",
+   "color": "Negro",
+   "price": 2000000,
+   "stock": 20,
+   "cod": "Tele01",
+   "published": "true",
+   "creationDate": "05-10-2022"
+  },
+  {
+   "id": 10,
+   "name": "Televisor",
+   "color": "Negro",
+   "price": 2000000,
+   "stock": 20,
+   "cod": "Tele01",
+   "published": "true",
+   "creationDate": "05-10-2022"
+  },
+  {
+   "id": 11,
+   "name": "Televisor",
+   "color": "Negro",
+   "price": 2000000,
+   "stock": 20,
+   "cod": "Tele01",
+   "published": "true",
+   "creationDate": "05-10-2022"
+  },
+  {
+   "id": 12,
+   "name": "Televisor",
+   "color": "Negro",
+   "price": 2000000,
+   "stock": 20,
+   "cod": "Tele01",
+   "published": "true",
+   "creationDate": "05-10-2022"
+  },
+  {
+   "id": 13,
+   "name": "Televisor",
+   "color": "Negro",
+   "price": 2000000,
+   "stock": 20,
+   "cod": "Tele01",
+   "published": "true",
+   "creationDate": "05-10-2022"
+  },
+  {
+   "id": 14,
+   "name": "Televisor",
+   "color": "Negro",
+   "price": 2000000,
+   "stock": 20,
+   "cod": "Tele01",
+   "published": "true",
+   "creationDate": "05-10-2022"
+  },
+  {
+   "id": 15,
+   "name": "Televisor",
+   "color": "Negro",
+   "price": 2000000,
+   "stock": 20,
+   "cod": "Tele01",
+   "published": "true",
+   "creationDate": "05-10-2022"
+  },
+  {
+   "id": 16,
+   "name": "Televisor",
+   "color": "Negro",
+   "price": 2000000,
+   "stock": 20,
+   "cod": "Tele01",
+   "published": "true",
+   "creationDate": "05-10-2022"
+  },
+  {
+   "id": 17,
+   "name": "Televisor",
+   "color": "Negro",
+   "price": 2000000,
+   "stock": 20,
+   "cod": "Tele01",
+   "published": "true",
+   "creationDate": "05-10-2022"
+  },
+  {
+   "id": 18,
+   "name": "Televisor",
+   "color": "Negro",
+   "price": 2000000,
+   "stock": 20,
+   "cod": "Tele01",
+   "published": "true",
+   "creationDate": "05-10-2022"
+  }
+ ]
+}
