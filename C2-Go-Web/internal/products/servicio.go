@@ -7,10 +7,10 @@ import (
 )
 
 type Service interface {
-	NewProduct(name string, color string, price float64, stock int, cod string, published string, creationDate string) (intities.Product, error)
+	NewProduct(name string, color string, price float64, stock int, cod string, published bool, creationDate string) (intities.Product, error)
 	GetProductById(id string) (intities.Product, error)
 	GetAll() (list []intities.Product, err error)
-	UpdateProduct(id int, name string, color string, price float64, stock int, cod string, published string, creationDate string) (intities.Product, error)
+	UpdateProduct(id int, name string, color string, price float64, stock int, cod string, published bool, creationDate string) (intities.Product, error)
 	Delete(id int) error
 }
 
@@ -24,7 +24,7 @@ func NewService(r Repository) Service {
 	}
 }
 
-func (s *service) NewProduct(name string, color string, price float64, stock int, cod string, published string, creationDate string) (intities.Product, error) {
+func (s *service) NewProduct(name string, color string, price float64, stock int, cod string, published bool, creationDate string) (intities.Product, error) {
 	product, err := s.repository.NewProduct(name, color, price, stock, cod, published, creationDate)
 	if err != nil {
 		return intities.Product{}, err
@@ -49,7 +49,7 @@ func (s *service) GetAll() (list []intities.Product, err error) {
 	}
 	return products, nil
 }
-func (s *service) UpdateProduct(id int, name string, color string, price float64, stock int, cod string, published string, creationDate string) (intities.Product, error) {
+func (s *service) UpdateProduct(id int, name string, color string, price float64, stock int, cod string, published bool, creationDate string) (intities.Product, error) {
 	return s.repository.UpdateProduct(id, name, color, price, stock, cod, published, creationDate)
 }
 func (s *service) Delete(id int) error {

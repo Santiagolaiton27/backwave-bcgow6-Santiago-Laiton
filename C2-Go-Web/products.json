@@ -1,5 +1,5 @@
 {
- "LastId": 18,
+ "LastId": 22,
  "Products": [
   {
    "id": 8,
@@ -8,17 +8,7 @@
    "price": 2000000,
    "stock": 20,
    "cod": "Tele01",
-   "published": "true",
-   "creationDate": "05-10-2022"
-  },
-  {
-   "id": 9,
-   "name": "Televisor",
-   "color": "Negro",
-   "price": 2000000,
-   "stock": 20,
-   "cod": "Tele01",
-   "published": "true",
+   "published": true,
    "creationDate": "05-10-2022"
   },
   {
@@ -28,7 +18,7 @@
    "price": 2000000,
    "stock": 20,
    "cod": "Tele01",
-   "published": "true",
+   "published": true,
    "creationDate": "05-10-2022"
   },
   {
@@ -38,7 +28,7 @@
    "price": 2000000,
    "stock": 20,
    "cod": "Tele01",
-   "published": "true",
+   "published": true,
    "creationDate": "05-10-2022"
   },
   {
@@ -48,7 +38,7 @@
    "price": 2000000,
    "stock": 20,
    "cod": "Tele01",
-   "published": "true",
+   "published": true,
    "creationDate": "05-10-2022"
   },
   {
@@ -58,7 +48,7 @@
    "price": 2000000,
    "stock": 20,
    "cod": "Tele01",
-   "published": "true",
+   "published": true,
    "creationDate": "05-10-2022"
   },
   {
@@ -68,7 +58,7 @@
    "price": 2000000,
    "stock": 20,
    "cod": "Tele01",
-   "published": "true",
+   "published": true,
    "creationDate": "05-10-2022"
   },
   {
@@ -78,7 +68,7 @@
    "price": 2000000,
    "stock": 20,
    "cod": "Tele01",
-   "published": "true",
+   "published": true,
    "creationDate": "05-10-2022"
   },
   {
@@ -88,7 +78,7 @@
    "price": 2000000,
    "stock": 20,
    "cod": "Tele01",
-   "published": "true",
+   "published": true,
    "creationDate": "05-10-2022"
   },
   {
@@ -98,7 +88,7 @@
    "price": 2000000,
    "stock": 20,
    "cod": "Tele01",
-   "published": "true",
+   "published": true,
    "creationDate": "05-10-2022"
   },
   {
@@ -108,7 +98,47 @@
    "price": 2000000,
    "stock": 20,
    "cod": "Tele01",
-   "published": "true",
+   "published": true,
+   "creationDate": "05-10-2022"
+  },
+  {
+   "id": 19,
+   "name": "Televisor",
+   "color": "Negro",
+   "price": 2000000,
+   "stock": 20,
+   "cod": "Tele01",
+   "published": true,
+   "creationDate": "05-10-2022"
+  },
+  {
+   "id": 20,
+   "name": "Televisor",
+   "color": "Negro",
+   "price": 2000000,
+   "stock": 20,
+   "cod": "Tele01",
+   "published": true,
+   "creationDate": "05-10-2022"
+  },
+  {
+   "id": 21,
+   "name": "Televisor",
+   "color": "Negro",
+   "price": 2000000,
+   "stock": 20,
+   "cod": "Tele01",
+   "published": false,
+   "creationDate": "05-10-2022"
+  },
+  {
+   "id": 22,
+   "name": "Televisor",
+   "color": "Negro",
+   "price": 2000000,
+   "stock": 20,
+   "cod": "Tele01",
+   "published": false,
    "creationDate": "05-10-2022"
   }
  ]

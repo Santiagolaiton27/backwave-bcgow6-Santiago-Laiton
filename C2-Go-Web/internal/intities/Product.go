@@ -7,6 +7,6 @@ type Product struct {
 	Price        float64 `json:"price"`
 	Stock        int     `json:"stock"`
 	Cod          string  `json:"cod"`
-	Published    string  `json:"published"`
+	Published    bool    `json:"published"`
 	CreationDate string  `json:"creationDate"`
 }

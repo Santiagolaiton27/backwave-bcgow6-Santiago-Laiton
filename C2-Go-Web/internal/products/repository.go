@@ -25,10 +25,10 @@ type Archivo struct {
 var ps Archivo
 
 type Repository interface {
-	NewProduct(name string, color string, price float64, stock int, cod string, published string, creationDate string) (intities.Product, error)
+	NewProduct(name string, color string, price float64, stock int, cod string, published bool, creationDate string) (intities.Product, error)
 	GetProductById(id int) (intities.Product, error)
 	GetAll() (list []intities.Product, err error)
-	UpdateProduct(id int, name string, color string, price float64, stock int, cod string, published string, creationDate string) (intities.Product, error)
+	UpdateProduct(id int, name string, color string, price float64, stock int, cod string, published bool, creationDate string) (intities.Product, error)
 	Delete(id int) error
 }
 type repository struct {
@@ -41,7 +41,7 @@ func NewRepository(db store.Store) Repository {
 	}
 }
 
-func (r *repository) NewProduct(name string, color string, price float64, stock int, cod string, published string, creationDate string) (intities.Product, error) {
+func (r *repository) NewProduct(name string, color string, price float64, stock int, cod string, published bool, creationDate string) (intities.Product, error) {
 	err := r.db.Read(&ps)
 	if err != nil {
 		return intities.Product{}, err
@@ -80,7 +80,7 @@ func (r *repository) GetAll() (list []intities.Product, err error) {
 	}
 	return ps.Products, nil
 }
-func (r *repository) UpdateProduct(id int, name string, color string, price float64, stock int, cod string, published string, creationDate string) (intities.Product, error) {
+func (r *repository) UpdateProduct(id int, name string, color string, price float64, stock int, cod string, published bool, creationDate string) (intities.Product, error) {
 	var newProduct intities.Product
 	var update bool
 	err := r.db.Read(&ps)

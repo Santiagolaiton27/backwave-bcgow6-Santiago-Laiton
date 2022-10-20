@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/Santiagolaiton27/backwave-bcgow6-Santiago-Laiton/C2-Go-Web/internal/products"
+	"github.com/Santiagolaiton27/backwave-bcgow6-Santiago-Laiton/C2-Go-Web/pkg/web"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 )
@@ -16,7 +17,7 @@ type Request struct {
 	Price        float64 `json:"price" validate:"required"`
 	Stock        int     `json:"stock" validate:"required"`
 	Cod          string  `json:"cod" validate:"required"`
-	Published    string  `json:"published" validate:"required"`
+	Published    *bool   `json:"published" validate:"required"`
 	CreationDate string  `json:"creationDate" validate:"required"`
 }
 type ProductFilters struct {
@@ -42,7 +43,7 @@ func NewProduct(p products.Service) *Product {
 
 func (p *Product) GetProductById() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		tokenAccepted := validateToken(os.Getenv("TOKEN"))
+		tokenAccepted := validateToken(ctx.GetHeader("Token"))
 		if !tokenAccepted {
 			ctx.JSON(http.StatusUnauthorized, "token invalido")
 			return
@@ -50,19 +51,19 @@ func (p *Product) GetProductById() gin.HandlerFunc {
 		if id := ctx.Param("id"); id != "" {
 			p, err := p.service.GetProductById(id)
 			if err != nil {
-				ctx.JSON(http.StatusBadRequest, err.Error())
+				ctx.JSON(http.StatusBadRequest, web.NewResponse(400, nil, err.Error()))
 			} else {
-				ctx.JSON(http.StatusOK, p)
+				ctx.JSON(http.StatusOK, web.NewResponse(200, p, ""))
 			}
 		} else {
-			ctx.JSON(http.StatusBadRequest, "No tiene el id para buscar el producto")
+			ctx.JSON(http.StatusBadRequest, web.NewResponse(400, nil, "No tiene el id para buscar el producto"))
 		}
 	}
 }
 
 func (p *Product) SaveProduct() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		tokenAccepted := validateToken(os.Getenv("TOKEN"))
+		tokenAccepted := validateToken(ctx.GetHeader("Token"))
 		if !tokenAccepted {
 			ctx.JSON(http.StatusUnauthorized, "token invalido")
 			return
@@ -74,20 +75,48 @@ func (p *Product) SaveProduct() gin.HandlerFunc {
 			})
 			return
 		}
-		if err := request.validate(); err != nil {
-			ctx.JSON(http.StatusBadRequest, gin.H{
-				"error": err.Error(),
-			})
+		// if err := request.validate(); err != nil {
+		// 	ctx.JSON(http.StatusBadRequest, gin.H{
+		// 		"error": err.Error(),
+		// 	})
+		// 	return
+		// }
+		if request.Name == "" {
+			ctx.JSON(http.StatusBadRequest, web.NewResponse(400, nil, "Para añadir el producto tiene que ingresar el nombre"))
 			return
 		}
-		p, err := p.service.NewProduct(request.Name, request.Color, request.Price, request.Stock, request.Cod, request.Published, request.CreationDate)
+		if request.Color == "" {
+			ctx.JSON(http.StatusBadRequest, web.NewResponse(400, nil, "Para añadir el producto tiene que ingresar el color"))
+			return
+		}
+		if request.Price == 0 {
+			ctx.JSON(http.StatusBadRequest, web.NewResponse(400, nil, "Para añadir el producto tiene que ingresar un precio diferente de 0"))
+			return
+		}
+		if request.Stock == 0 {
+			ctx.JSON(http.StatusBadRequest, web.NewResponse(400, nil, "Para añadir el producto tiene que ingresar las cantidades diponibles y tienen que ser diferente de 0"))
+			return
+		}
+		if request.Cod == "" {
+			ctx.JSON(http.StatusBadRequest, web.NewResponse(400, nil, "Para añadir el producto tiene que ingresar el Codigo"))
+			return
+		}
+		if request.Published == nil {
+			ctx.JSON(http.StatusBadRequest, web.NewResponse(400, nil, "Para añadir el producto tiene que ingresar el Codigo"))
+			return
+		}
+		if request.CreationDate == "" {
+			ctx.JSON(http.StatusBadRequest, web.NewResponse(400, nil, "Para añadir el producto tiene que ingresar la fecha de creacion"))
+			return
+		}
+		p, err := p.service.NewProduct(request.Name, request.Color, request.Price, request.Stock, request.Cod, *request.Published, request.CreationDate)
 		if err != nil {
 			ctx.JSON(http.StatusBadRequest, gin.H{
 				"error": err.Error(),
 			})
 			return
 		}
-		ctx.JSON(http.StatusOK, p)
+		ctx.JSON(http.StatusOK, web.NewResponse(200, p, ""))
 	}
 }
 func (request *Request) validate() error {
@@ -96,7 +125,7 @@ func (request *Request) validate() error {
 }
 func (c *Product) UpdateProduct() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		tokenAccepted := validateToken(os.Getenv("TOKEN"))
+		tokenAccepted := validateToken(ctx.GetHeader("Token"))
 		if !tokenAccepted {
 			ctx.JSON(http.StatusUnauthorized, "token invalido")
 			return
@@ -106,17 +135,41 @@ func (c *Product) UpdateProduct() gin.HandlerFunc {
 			ctx.JSON(http.StatusBadRequest, "El id debe ser un numero")
 			return
 		}
-
 		var request Request
 		if err := ctx.Bind(&request); err != nil {
 			ctx.JSON(http.StatusBadRequest, err.Error())
 			return
 		}
-		if err := request.validate(); err != nil {
-			ctx.JSON(http.StatusOK, err.Error())
+		// if err := request.validate(); err != nil {
+		// 	ctx.JSON(http.StatusOK, err.Error())
+		// 	return
+		// }
+		if request.Name == "" {
+			ctx.JSON(http.StatusBadRequest, web.NewResponse(400, nil, "Para añadir el producto tiene que ingresar el nombre"))
 			return
 		}
-		p, err := c.service.UpdateProduct(id, request.Name, request.Color, request.Price, request.Stock, request.Cod, request.Published, request.CreationDate)
+		if request.Color == "" {
+			ctx.JSON(http.StatusBadRequest, web.NewResponse(400, nil, "Para añadir el producto tiene que ingresar el color"))
+			return
+		}
+		if request.Price == 0 {
+			ctx.JSON(http.StatusBadRequest, web.NewResponse(400, nil, "Para añadir el producto tiene que ingresar un precio diferente de 0"))
+			return
+		}
+		if request.Stock == 0 {
+			ctx.JSON(http.StatusBadRequest, web.NewResponse(400, nil, "Para añadir el producto tiene que ingresar las cantidades diponibles y tienen que ser diferente de 0"))
+			return
+		}
+		if request.Cod == "" {
+			ctx.JSON(http.StatusBadRequest, web.NewResponse(400, nil, "Para añadir el producto tiene que ingresar el Codigo"))
+			return
+		}
+
+		if request.CreationDate == "" {
+			ctx.JSON(http.StatusBadRequest, web.NewResponse(400, nil, "Para añadir el producto tiene que ingresar la fecha de creacion"))
+			return
+		}
+		p, err := c.service.UpdateProduct(id, request.Name, request.Color, request.Price, request.Stock, request.Cod, *request.Published, request.CreationDate)
 		if err != nil {
 			ctx.JSON(http.StatusBadRequest, err.Error())
 			return
@@ -126,14 +179,14 @@ func (c *Product) UpdateProduct() gin.HandlerFunc {
 }
 func validateToken(token string) (ok bool) {
 	correct := true
-	if token != "1001169364" {
+	if token != os.Getenv("TOKEN") {
 		correct = false
 	}
 	return correct
 }
 func (p *Product) GetAll() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		tokenAccepted := validateToken(os.Getenv("TOKEN"))
+		tokenAccepted := validateToken(ctx.GetHeader("Token"))
 		if !tokenAccepted {
 			ctx.JSON(http.StatusUnauthorized, "token invalido")
 			return
@@ -191,7 +244,7 @@ func (p *Product) ProductFilters() gin.HandlerFunc {
 
 func (p *Product) DeleteProduct() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		tokenAccepted := validateToken(os.Getenv("TOKEN"))
+		tokenAccepted := validateToken(ctx.GetHeader("Token"))
 		if !tokenAccepted {
 			ctx.JSON(http.StatusUnauthorized, "token invalido")
 			return
