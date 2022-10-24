@@ -51,4 +51,5 @@ func TestGetAllProducts(t *testing.T) {
 	err := json.Unmarshal(rr.Body.Bytes(), &resp)
 	assert.Nil(t, err)
 	assert.Equal(t, http.StatusOK, rr.Code)
+	assert.Equal(t, len(mockStorage.DataMock), len(resp))
 }
