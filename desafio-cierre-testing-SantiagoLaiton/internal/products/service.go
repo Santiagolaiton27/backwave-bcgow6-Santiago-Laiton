@@ -1,9 +1,13 @@
 package products
 
-import "log"
+import (
+	"log"
+
+	"github.com/Santiagolaiton27/backwave-bcgow6-Santiago-Laiton/desafio-cierre-testing-SantiagoLaiton/internal/models"
+)
 
 type Service interface {
-	GetAllBySeller(sellerID string) ([]Product, error)
+	GetAllBySeller(sellerID string) ([]models.Product, error)
 }
 
 type service struct {
@@ -16,7 +20,7 @@ func NewService(repo Repository) Service {
 	}
 }
 
-func (s *service) GetAllBySeller(sellerID string) ([]Product, error) {
+func (s *service) GetAllBySeller(sellerID string) ([]models.Product, error) {
 	data, err := s.repo.GetAllBySeller(sellerID)
 	if err != nil {
 		log.Println("error in repository", err.Error(), "sellerId:", sellerID)

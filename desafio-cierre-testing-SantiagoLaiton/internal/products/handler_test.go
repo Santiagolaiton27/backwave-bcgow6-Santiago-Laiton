@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/Santiagolaiton27/backwave-bcgow6-Santiago-Laiton/desafio-cierre-testing-SantiagoLaiton/internal/products"
+	"github.com/Santiagolaiton27/backwave-bcgow6-Santiago-Laiton/desafio-cierre-testing-SantiagoLaiton/internal/models"
 	"github.com/Santiagolaiton27/backwave-bcgow6-Santiago-Laiton/desafio-cierre-testing-SantiagoLaiton/test/mocks"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
@@ -15,9 +15,9 @@ import (
 
 func createServer(mockStore mocks.MockStore) *gin.Engine {
 	gin.SetMode(gin.ReleaseMode)
-	repo := products.NewRepository()
-	service := products.NewService(repo)
-	p := products.NewHandler(service)
+	repo := NewRepository()
+	service := NewService(repo)
+	p := NewHandler(service)
 
 	r := gin.Default()
 	pr := r.Group("/api/v1/products")
@@ -33,7 +33,7 @@ func createRequestTest(method string, url string, body string) (*http.Request, *
 func TestGetAllProducts(t *testing.T) {
 	//arrange
 	mockStorage := mocks.MockStore{
-		DataMock: []products.Product{{
+		DataMock: []models.Product{{
 			ID:          "mock",
 			SellerID:    "FEX112AC",
 			Description: "generic product",
@@ -41,7 +41,7 @@ func TestGetAllProducts(t *testing.T) {
 		},
 		},
 	}
-	var resp []products.Product
+	var resp []models.Product
 	r := createServer(mockStorage)
 	request, rr := createRequestTest(http.MethodGet, "/api/v1/products?seller_id=mock", "")
 

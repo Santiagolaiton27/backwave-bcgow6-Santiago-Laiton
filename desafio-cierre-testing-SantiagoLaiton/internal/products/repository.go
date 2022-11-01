@@ -1,7 +1,9 @@
 package products
 
+import "github.com/Santiagolaiton27/backwave-bcgow6-Santiago-Laiton/desafio-cierre-testing-SantiagoLaiton/internal/models"
+
 type Repository interface {
-	GetAllBySeller(sellerID string) ([]Product, error)
+	GetAllBySeller(sellerID string) ([]models.Product, error)
 }
 
 type repository struct{}
@@ -10,9 +12,9 @@ func NewRepository() Repository {
 	return &repository{}
 }
 
-func (r *repository) GetAllBySeller(sellerID string) ([]Product, error) {
-	var prodList []Product
-	prodList = append(prodList, Product{
+func (r *repository) GetAllBySeller(sellerID string) ([]models.Product, error) {
+	var prodList []models.Product
+	prodList = append(prodList, models.Product{
 		ID:          "mock",
 		SellerID:    "FEX112AC",
 		Description: "generic product",
